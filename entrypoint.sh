@@ -25,6 +25,14 @@ if [ -z "$CHART_DIR" ]; then
   CHART_DIR="."
 fi
 
+if [ ! -z "$CHART_VERSION" ]; then
+  CHART_VERSION="--version ${CHART_VERSION}"
+fi
+
+if [ ! -z "$APP_VERSION" ]; then
+  APP_VERSION="--version ${APP_VERSION}"
+fi
+
 # make lowercase
 FORCE=$(echo "$FORCE" | tr '[:upper:]' '[:lower:]')
 if [ "$FORCE" == "1" ] || [ "$FORCE" == "y" ] || [ "$FORCE" == "yes" ] || [ "$FORCE" == "true" ]; then
@@ -35,6 +43,6 @@ fi
 
 cd ${CHART_DIR}/${CHART}
 helm inspect chart .
-helm package .
+helm package ${APP_VERSION} ${CHART_VERSION} .
 helm dependency update .
 helm push ${CHART_DIR}-* ${REGISTRY} -u ${USER} -p ${PASSWORD} ${FORCE}

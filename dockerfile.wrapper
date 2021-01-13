@@ -1,0 +1,1 @@
+FROM romnnn/helm-push-action:latest

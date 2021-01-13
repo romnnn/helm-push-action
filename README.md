@@ -1,4 +1,4 @@
-# Helm push action
+### Helm push action
 
 GiHub action to package and publish your helm chart to a registry such as chartmuseum or harbor.
 
@@ -13,14 +13,16 @@ jobs:
     - uses: actions/checkout@v2
     - uses: romnnn/helm-push-action@v1
       with:
-        chart-dir: '.'
-        chart: 'my-awesome-chart'
+        charts-dir: '.'
+        chart-name: 'my-awesome-chart'
         force: true
+        chart-version: '1.2.5'
+        app-version: '1.2.5'
         registry: 'https://my.registry.com'
         user: '${{ secrets.HELM_REGISTRY_USER }}'
         password: ${{ secrets.HELM_REGISTRY_PASSWORD }}
 ```
 
-## License
+#### License
 
 [MIT](LICENSE)
