@@ -26,10 +26,12 @@ if [ -z "$CHART_DIR" ]; then
 fi
 
 if [ ! -z "$CHART_VERSION" ]; then
+  CHART_VERSION=$(echo "${CHART_VERSION}" | sed -e 's|refs/tags||' | sed -e 's/^v//')
   CHART_VERSION="--version ${CHART_VERSION}"
 fi
 
 if [ ! -z "$APP_VERSION" ]; then
+  APP_VERSION=$(echo "${APP_VERSION}" | sed -e 's|refs/tags||' | sed -e 's/^v//' | sed -e 's/+.*//')
   APP_VERSION="--version ${APP_VERSION}"
 fi
 
