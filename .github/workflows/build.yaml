@@ -10,3 +10,5 @@ jobs:
       run: docker build -t helm-push-action .
     - name: test helm binary
       run: docker run --rm -i --entrypoint=helm helm-push-action version -c
+    - name: test helm push plugin
+      run: docker run --rm -i --entrypoint=helm helm-push-action push --help

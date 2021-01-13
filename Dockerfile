@@ -5,7 +5,8 @@ LABEL maintainer="romnn <contact@romnn.com>" \
   org.label-schema.vendor="romnnn" \
   org.label-schema.schema-version="1.0"
 
-ENV HELM_VERSION v3.4.2
+# unfortunately, cannot upgrade helm and the push plugin due to conflicts
+ENV HELM_VERSION v3.3.1
 ENV HELM_PLUGIN_PUSH_VERSION v0.9.0
 
 ENV XDG_DATA_HOME=/opt/xdg
