@@ -23,4 +23,4 @@ jobs:
 
 ## License
 
-[MIT license](LICENSE.md).
+[MIT](LICENSE).
