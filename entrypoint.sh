@@ -45,4 +45,4 @@ cd ${CHART_DIR}/${CHART}
 helm inspect chart .
 helm package ${APP_VERSION} ${CHART_VERSION} .
 helm dependency update .
-helm push ${CHART_DIR}-* ${REGISTRY} -u ${USER} -p ${PASSWORD} ${FORCE}
+helm push ${CHART}-* ${REGISTRY} -u ${USER} -p ${PASSWORD} ${FORCE}
