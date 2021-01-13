@@ -1,44 +1,40 @@
 #!/bin/bash
 set -e
 
-if [ -z "$CHART_FOLDER" ]; then
-  echo "CHART_FOLDER is not set. Quitting."
+if [ -z "$CHART" ]; then
+  echo "missing helm chart name"
   exit 1
 fi
 
-if [ -z "$CHARTMUSEUM_URL" ]; then
-  echo "CHARTMUSEUM_URL is not set. Quitting."
+if [ -z "$REGISTRY" ]; then
+  echo "missing helm registry url"
   exit 1
 fi
 
-if [ -z "$CHARTMUSEUM_USER" ]; then
-  echo "CHARTMUSEUM_USER is not set. Quitting."
+if [ -z "$USER" ]; then
+  echo "missing helm registry user"
   exit 1
 fi
 
-if [ -z "$CHARTMUSEUM_PASSWORD" ]; then
-  echo "CHARTMUSEUM_PASSWORD is not set. Quitting."
+if [ -z "$PASSWORD" ]; then
+  echo "missing helm registry password"
   exit 1
 fi
 
-if [ -z "$SOURCE_DIR" ]; then
-  SOURCE_DIR="."
+if [ -z "$CHART_DIR" ]; then
+  CHART_DIR="."
 fi
 
-if [ -z "$FORCE" ]; then
-  FORCE=""
-elif [ "$FORCE" == "1" ] || [ "$FORCE" == "True" ] || [ "$FORCE" == "TRUE" ]; then
+# make lowercase
+FORCE=$(echo "$FORCE" | tr '[:upper:]' '[:lower:]')
+if [ "$FORCE" == "1" ] || [ "$FORCE" == "y" ] || [ "$FORCE" == "yes" ] || [ "$FORCE" == "true" ]; then
   FORCE="-f"
+else
+  FORCE=""
 fi
 
-
-
-cd ${SOURCE_DIR}/${CHART_FOLDER}
-
+cd ${CHART_DIR}/${CHART}
 helm inspect chart .
-
 helm package .
-
 helm dependency update .
-
-helm push ${CHART_FOLDER}-* ${CHARTMUSEUM_URL} -u ${CHARTMUSEUM_USER} -p ${CHARTMUSEUM_PASSWORD} ${FORCE}
+helm push ${CHART_DIR}-* ${REGISTRY} -u ${USER} -p ${PASSWORD} ${FORCE}

@@ -1,14 +1,37 @@
-name: 'Helm Push Action'
-description: 'Package helm chart and push it to Chartmuseum'
-author: 'Goodsmileduck'
+name: 'helm-push-action'
+description: 'package and publish your helm chart to a registry, e.g. chartmuseum or harbor'
+author: 'romnnn'
 branding:
   color: 'blue'
   icon: 'upload-cloud'
 inputs: 
-  ChartmuseumUrl:
-    description: 'Url to your Chartmuseum'
-    default: ''
+  chart-dir:
+    description: 'directory containing the charts to upload, e.g. ./charts'
+    required: false
+    default: '.'
+  chart:
+    description: 'directory containing the chart'
+    required: true
+  force:
+    description: 'force upload of the chart even if the version already exists'
+    required: false
+    default: false
+  user:
+    description: 'helm registry user'
+    required: true
+  password:
+    description: 'helm registry password'
+    required: true
+  registry:
+    description: 'helm registry'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  
+  env:
+    CHART_DIR: ${{ inputs.chart-dir }}
+    CHART: ${{ inputs.chart }}
+    FORCE: ${{ inputs.force }}
+    USER: ${{ inputs.user }}
+    PASSWORD: ${{ inputs.password }}
+    REGISTRY: ${{ inputs.registry }}
