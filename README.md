@@ -1,4 +1,8 @@
-### Helm push action
+## This action is deprecated and has been replaced by [helm-deploy-action](https://github.com/romnnn/helm-deploy-action).
+
+The new and improved [helm-deploy-action](https://github.com/romnnn/helm-deploy-action) offers support for pushing and deploying helm3 charts and should be used instead.
+
+#### Helm push action (DEPRECATED)
 
 GiHub action to package and publish your helm chart to a registry such as chartmuseum or harbor.
 
