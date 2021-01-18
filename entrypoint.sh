@@ -32,7 +32,7 @@ fi
 
 if [ ! -z "$APP_VERSION" ]; then
   APP_VERSION=$(echo "${APP_VERSION}" | sed -e 's|refs/tags||' | sed -e 's/^v//' | sed -e 's/+.*//')
-  APP_VERSION="--version ${APP_VERSION}"
+  APP_VERSION="--app-version ${APP_VERSION}"
 fi
 
 # make lowercase
